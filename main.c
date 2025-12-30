@@ -30,6 +30,8 @@ int main(void)
 
     close(fd);
     return (0);
+
+    //printf("Read %d bytes: [%s]\n", bytes_read, buffer);
 }
 
 // bytes_read = read(fd, buffer, BUFFER_SIZE); followed by while (bytes_read > 0)
