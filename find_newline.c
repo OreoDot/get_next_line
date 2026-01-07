@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // int find_newline (char *s)
 // {
@@ -19,46 +20,58 @@
 //     return (-1);
 // }
 
-char *extract_line (char *cache)
-{
-    char    *newline;
-    int         i;
+// char* extract_line (char *cache)
+// {
+//     char    *newline;
+//     int         i;
 
-    if (!cache)
-        return (NULL);
+//     if (!cache)
+//         return (NULL);
     
-    i = 0;
-    while (cache[i] != '\0' && cache[i] != '\n')
-        i++;
+//     i = 0;
+//     while (cache[i] != '\0' && cache[i] != '\n')
+//         i++;
     
-    newline = malloc(sizeof(char) * (i + 2));
-    if (!newline)
-        return (NULL);
+//     newline = malloc(sizeof(char) * (i + 2));
+//     if (!newline)
+//         return (NULL);
 
-    i = 0;
-    while (cache[i] != '\0' && cache[i] != '\n')
-    {
-        newline[i] = cache[i];
-        i++;
-    }
+//     i = 0;
+//     while (cache[i] != '\0' && cache[i] != '\n')
+//     {
+//         newline[i] = cache[i];
+//         i++;
+//     }
 
-    if (cache[i] == '\n')
-    {
-        newline[i] = '\n';
-        i++;
-    }
-    newline[i] = '\0';
-    return (newline);
-}
+//     if (cache[i] == '\n')
+//     {
+//         newline[i] = '\n';
+//         i++;
+//     }
+//     newline[i] = '\0';
+//     return (newline);
+// }
 
 // int main()
 // {
-//     char *s = "Hello\nDt";
+//     char *s = "Hello\nDating\nLord";
 //     char *n = extract_line(s);
 //     printf("%s", n);
 // }
 
-char *trim_cache(char *cache)
+int ft_strlen(char* str)
+{
+    int i;
+    i = 0;
+    
+    while(str[i] != '\0')
+    {
+        i++;
+    }
+    return(i);
+}
+
+char* trim_cache(char *cache)
 {
     char *new_cache;
     int           i;
@@ -93,3 +106,20 @@ char *trim_cache(char *cache)
     free(cache);
     return(new_cache);
 }
+
+// int main()
+// {
+//     char *s_literal = "Hello\nDating\nLord";
+//     char *s = malloc(strlen(s_literal) + 1);
+//     if (!s)
+//         return (1);
+//     strcpy(s, s_literal);
+
+//     char *n = trim_cache(s);
+//     if (n)
+//     {
+//         printf("%s", n);
+//         free(n);
+//     }
+//     return (0);
+// }
