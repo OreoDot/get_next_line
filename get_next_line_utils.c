@@ -68,7 +68,7 @@ char* extract_line (char *cache)
     char    *newline;
     int         i;
 
-    if (!cache)
+    if (!cache || !*cache)
         return (NULL);
     
     i = 0;
