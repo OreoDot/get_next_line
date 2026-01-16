@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolaniya <dolaniya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:19:17 by dolaniya          #+#    #+#             */
-/*   Updated: 2026/01/15 17:07:14 by dolaniya         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:49:03 by dolaniya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -70,22 +70,22 @@ int	buffer_prep(char *buffer, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[MAX_BUFFER][BUFFER_SIZE + 1];
 	char		*line;
 	ssize_t		rd;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= MAX_BUFFER || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	rd = 1;
 	while (rd > 0)
 	{
-		if (buffer_prep(buffer, &line))
-			return (extract_line(buffer, line));
-		rd = read(fd, buffer, BUFFER_SIZE);
+		if (buffer_prep(buffer[fd], &line))
+			return (extract_line(buffer[fd], line));
+		rd = read(fd, buffer[fd], BUFFER_SIZE);
 		if (rd < 0)
 			return (free(line), NULL);
-		buffer[rd] = '\0';
+		buffer[fd][rd] = '\0';
 	}
 	return (line);
 }
